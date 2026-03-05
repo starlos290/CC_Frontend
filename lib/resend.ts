@@ -1,6 +1,8 @@
 import { Resend } from 'resend'
 
-export const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY || 'placeholder')
+}
 
 export async function sendConfirmationEmail({
   firstName,
@@ -13,22 +15,22 @@ export async function sendConfirmationEmail({
   tier?: string
   specialty?: string
 }) {
+  if (!process.env.RESEND_API_KEY) return
+
   const tierLabel =
     tier === 'launch' ? 'Launch ($297/mo)' :
     tier === 'operate' ? 'Operate ($797/mo)' :
     tier === 'scale' ? 'Scale (Custom)' :
     'your selected plan'
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: 'ClinicClaw <hello@clinicclaw.com>',
     to: email,
     subject: `${firstName}, your ClinicClaw application is received`,
     html: `
       <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 20px; background: #080c18; color: #f8fafc;">
         <div style="margin-bottom: 32px;">
-          <div style="display: inline-flex; align-items: center; gap: 8px;">
-            <span style="font-size: 20px; font-weight: 700; color: #f8fafc;">Clinic<span style="color: #14b8a6;">Claw</span></span>
-          </div>
+          <span style="font-size: 20px; font-weight: 700; color: #f8fafc;">Clinic<span style="color: #14b8a6;">Claw</span></span>
         </div>
 
         <h1 style="font-size: 24px; font-weight: 700; color: #f8fafc; margin-bottom: 16px; line-height: 1.3;">
