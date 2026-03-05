@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import { sendConfirmationEmail } from '@/lib/resend'
 
 export async function POST(request: NextRequest) {
@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Insert into Supabase
+    const supabase = getSupabase()
     const { error: dbError } = await supabase.from('applications').insert({
       first_name,
       last_name,
