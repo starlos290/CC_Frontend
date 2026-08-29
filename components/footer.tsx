@@ -1,128 +1,61 @@
-import Link from 'next/link'
-import { Shield, Mail, Building2 } from 'lucide-react'
+import { Twitter, Instagram, Youtube, Linkedin } from 'lucide-react'
 
-const footerLinks = {
-  Product: [
-    { label: 'Automations', href: '/automations' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'HIPAA Compliance', href: '/hipaa' },
-    { label: 'Apply Now', href: '/apply' },
-  ],
-  Specialties: [
-    { label: 'Chiropractors', href: '/for-chiropractors' },
-    { label: 'Med Spas', href: '/for-med-spas' },
-    { label: 'Dentists', href: '/for-dentists' },
-    { label: 'Physical Therapy', href: '/for-physical-therapy' },
-    { label: 'Mental Health', href: '/for-mental-health' },
-    { label: 'Orthopedics', href: '/for-orthopedics' },
-  ],
-  'More Specialties': [
-    { label: 'Dermatologists', href: '/for-dermatologists' },
-    { label: 'Plastic Surgery', href: '/for-plastic-surgery' },
-    { label: 'Podiatrists', href: '/for-podiatrists' },
-    { label: 'LASIK', href: '/for-lasik' },
-    { label: 'Wellness Centers', href: '/for-wellness-centers' },
-    { label: 'Acupuncture', href: '/for-acupuncture' },
-  ],
-  Company: [
-    { label: 'Blog', href: '/blog' },
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
-  ],
-}
+const socials = [
+  { Icon: Twitter,   href: 'https://twitter.com/carloscourtney',          label: 'X / Twitter' },
+  { Icon: Instagram, href: 'https://www.instagram.com/helloimcarlos/',     label: 'Instagram' },
+  { Icon: Youtube,   href: 'https://www.youtube.com/c/CarlosCourtney',     label: 'YouTube' },
+  { Icon: Linkedin,  href: 'https://www.linkedin.com/in/carloscourtney',   label: 'LinkedIn' },
+]
+
+const links = [
+  { label: 'Work',    href: '#works' },
+  { label: 'About',   href: '#about' },
+  { label: 'Process', href: '#process' },
+  { label: 'Contact', href: '#contact' },
+  { label: 'Metaphase Marketing', href: 'https://www.metaphasemarketing.com', external: true },
+]
 
 export default function Footer() {
   return (
-    <footer className="bg-[#060a15] border-t border-white/5">
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          {/* Brand column */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path
-                    d="M9 2L14.5 5.25V11.75L9 15L3.5 11.75V5.25L9 2Z"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6.5 9L8 10.5L11.5 7"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <span className="font-sora font-700 text-lg text-text-primary tracking-tight">
-                Clinic<span className="text-accent">Claw</span>
-              </span>
-            </Link>
-            <p className="text-sm text-text-secondary leading-relaxed mb-5">
-              Your 24/7 AI employee for private healthcare practices. HIPAA-safe, deployed in 48 hours.
-            </p>
-            <div className="flex items-center gap-2 text-xs text-trust">
-              <Shield className="w-3.5 h-3.5 shrink-0" />
-              <span>HIPAA-Safe — BAA Included</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-text-muted mt-2">
-              <Building2 className="w-3.5 h-3.5 shrink-0" />
-              <span>By Metaphase Marketing</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-text-muted mt-2">
-              <Mail className="w-3.5 h-3.5 shrink-0" />
-              <a
-                href="mailto:hello@clinicclaw.com"
-                className="hover:text-accent transition-colors"
-              >
-                hello@clinicclaw.com
+    <footer className="relative border-t border-white/[0.07] bg-bg-base py-16">
+      <div className="max-w-6xl mx-auto px-6">
+
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 mb-12">
+
+          {/* Brand */}
+          <div>
+            <p className="font-heading font-bold text-lg text-white mb-1">Carlos Courtney</p>
+            <p className="text-white/30 text-sm">CEO, Metaphase Marketing</p>
+          </div>
+
+          {/* Nav links */}
+          <div className="flex flex-wrap gap-x-7 gap-y-2">
+            {links.map(l => (
+              <a key={l.label}
+                href={l.href}
+                target={l.external ? '_blank' : undefined}
+                rel={l.external ? 'noopener noreferrer' : undefined}
+                className="text-sm text-white/35 hover:text-white/70 transition-colors">
+                {l.label}
               </a>
-            </div>
+            ))}
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([group, links]) => (
-            <div key={group}>
-              <p className="text-xs font-semibold text-text-primary uppercase tracking-widest mb-4">
-                {group}
-              </p>
-              <ul className="space-y-2.5">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-text-secondary hover:text-accent transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Socials */}
+          <div className="flex items-center gap-3">
+            {socials.map(({ Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-amber-400 hover:border-amber-500/30 transition-all duration-200">
+                <Icon size={14} />
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-text-muted">
-            &copy; {new Date().getFullYear()} ClinicClaw by Metaphase Marketing. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="text-xs text-text-muted hover:text-accent transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="text-xs text-text-muted hover:text-accent transition-colors">
-              Terms
-            </Link>
-            <Link href="/hipaa" className="text-xs text-text-muted hover:text-accent transition-colors">
-              HIPAA
-            </Link>
-          </div>
+        {/* Bottom bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/[0.06]">
+          <p className="text-white/20 text-xs">© 2026 Carlos Courtney. All rights reserved.</p>
+          <p className="text-white/15 text-xs">Built for performance. Designed for growth.</p>
         </div>
       </div>
     </footer>

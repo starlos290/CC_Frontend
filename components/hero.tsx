@@ -3,119 +3,76 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: 'easeOut' },
+  transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
 })
 
-const brands = [
-  'Allergan',
-  'Keller Williams',
-  'The Game Changers (Netflix)',
-  'Political Campaigns',
-  'Health Clinics',
-  'eCommerce Brands',
-  'Allergan',
-  'Keller Williams',
-  'The Game Changers (Netflix)',
-  'Political Campaigns',
-  'Health Clinics',
-  'eCommerce Brands',
-]
+const platforms = ['Meta Ads', 'Google Ads', 'YouTube', 'TikTok', 'Programmatic', 'Meta CAPI', 'Full-Funnel', 'Direct Response']
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg-base">
-      {/* Grid dot background */}
-      <div className="absolute inset-0 bg-grid-dots bg-grid-md opacity-60" />
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid-dots bg-grid-md opacity-100 pointer-events-none" />
 
-      {/* Ambient amber glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
+      {/* Amber ambient glow — big, soft */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[800px] h-[500px] rounded-full bg-amber-500/[0.04] blur-[160px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+
         {/* Badge */}
-        <motion.div {...fadeUp(0.1)} className="inline-flex items-center gap-2 mb-8">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="text-sm text-text-secondary font-medium tracking-wide">
+        <motion.div {...fade(0.1)} className="flex justify-center mb-8">
+          <span className="badge">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
             Performance Marketer · CEO, Metaphase Marketing
           </span>
         </motion.div>
 
         {/* H1 */}
-        <motion.h1
-          {...fadeUp(0.2)}
-          className="font-heading text-5xl md:text-7xl font-extrabold leading-[1.05] mb-6"
-        >
-          I Build Marketing Machines{' '}
-          <br className="hidden md:block" />
-          That{' '}
-          <span className="text-gradient-gold">Scale.</span>
+        <motion.h1 {...fade(0.2)}
+          className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[1.0] tracking-tight mb-8">
+          I Build Marketing<br />
+          Machines That{' '}
+          <span className="text-gold">Scale.</span>
         </motion.h1>
 
-        {/* Subheadline */}
-        <motion.p
-          {...fadeUp(0.35)}
-          className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          6 years. $30M+ in ad spend. 50M+ leads. I&apos;ve cracked the code on what
-          actually moves the needle — now I use it to grow businesses like yours.
+        {/* Sub */}
+        <motion.p {...fade(0.35)}
+          className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
+          6 years. $30M+ in ad spend. 50M+ leads generated. I&apos;ve cracked what actually
+          moves the needle — and I use it to grow businesses like yours.
         </motion.p>
 
         {/* CTAs */}
-        <motion.div
-          {...fadeUp(0.5)}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-        >
-          <a
-            href="https://cal.com/metaphase-marketing/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-7 py-4 rounded-xl bg-accent text-bg-base font-bold text-base hover:bg-accent-dark transition-all duration-200 shadow-glow-amber"
-          >
+        <motion.div {...fade(0.45)} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+          <a href="https://cal.com/metaphase-marketing/15min" target="_blank" rel="noopener noreferrer"
+            className="btn-primary">
             Book a Discovery Call
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={16} />
           </a>
-          <button
-            onClick={() => {
-              const el = document.querySelector('#works')
-              if (el) el.scrollIntoView({ behavior: 'smooth' })
-            }}
-            className="px-7 py-4 rounded-xl border border-white/[0.12] text-text-primary font-semibold text-base hover:border-accent/30 hover:text-accent transition-all duration-200"
-          >
+          <button onClick={() => document.querySelector('#works')?.scrollIntoView({ behavior: 'smooth' })}
+            className="btn-ghost">
             See My Work
           </button>
         </motion.div>
 
-        {/* Social proof marquee */}
-        <motion.div {...fadeUp(0.65)} className="w-full overflow-hidden">
-          <p className="text-xs text-text-muted uppercase tracking-widest mb-4">
-            Trusted by brands like&hellip;
-          </p>
-          <div className="relative flex overflow-hidden">
-            <div className="flex animate-marquee whitespace-nowrap">
-              {brands.map((brand, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center gap-4 mx-6 text-text-muted text-sm font-medium"
-                >
-                  <span className="w-1 h-1 rounded-full bg-accent/50" />
-                  {brand}
-                </span>
-              ))}
-            </div>
-          </div>
+        {/* Platform tags */}
+        <motion.div {...fade(0.55)} className="flex flex-wrap justify-center gap-2">
+          {platforms.map(p => (
+            <span key={p} className="px-3 py-1 rounded-full text-xs text-white/30 border border-white/[0.07] font-medium">
+              {p}
+            </span>
+          ))}
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-text-muted animate-bounce"
-      >
-        <ChevronDown size={22} />
+      <motion.div {...fade(0.9)}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20">
+        <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
+        <ChevronDown size={16} className="animate-bounce" />
       </motion.div>
     </section>
   )

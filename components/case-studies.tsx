@@ -3,117 +3,112 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { TrendingUp, ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
 const cases = [
   {
-    tag: 'Entertainment / Film Marketing',
-    result: '$110K/mo Multi-Platform Campaign',
+    tag: 'Entertainment',
+    badge: 'Netflix Documentary',
     client: 'The Game Changers',
-    sub: 'Netflix film by James Cameron, Arnold Schwarzenegger, Jackie Chan',
-    details: '$70K/mo Meta · $30K/mo Google Ads · $10K/mo YouTube',
-    description:
-      'Took a revolutionary documentary about plant-based performance and made it go viral across every major ad platform.',
+    sub: 'By James Cameron, Arnold Schwarzenegger & Jackie Chan',
+    result: '$110K/mo',
+    resultLabel: 'Multi-Platform Ad Spend',
+    stats: [['$70K/mo','Meta'], ['$30K/mo','Google'], ['$10K/mo','YouTube']],
+    description: 'Took a revolutionary documentary about plant-based performance and made it go viral across every major platform.',
   },
   {
-    tag: 'Political Advertising',
-    result: '$3.32 Cost Per Lead',
+    tag: 'Political',
+    badge: 'Digital Campaign',
     client: 'Political Campaign',
-    sub: 'Digital reach at scale',
-    details: 'Below-average CPL in a high-competition vertical',
-    description:
-      'Scaled a political campaign\'s digital reach with highly targeted paid media, driving leads at a fraction of industry average.',
+    sub: 'Statewide digital reach strategy',
+    result: '$3.32',
+    resultLabel: 'Cost Per Lead',
+    stats: [['100K+','Leads'], ['Below avg','CPL'], ['Multi-channel','Strategy']],
+    description: 'Scaled a political campaign\'s digital reach with precision targeting — leads at a fraction of industry average CPL.',
   },
   {
-    tag: 'Healthcare / Weight Loss',
-    result: '5.6X Average ROAS',
-    client: 'Weight Loss Center',
-    sub: 'Multi-channel funnel strategy',
-    details: 'Consistent 5.6X return on ad spend over 6+ months',
-    description:
-      'Built a complete funnel from cold traffic to booked appointments for a weight loss clinic. Multi-channel strategy across Meta and Google.',
+    tag: 'Healthcare',
+    badge: 'Weight Loss Center',
+    client: 'Weight Loss Clinic',
+    sub: 'Full-funnel lead generation',
+    result: '5.6X',
+    resultLabel: 'Average ROAS',
+    stats: [['6+ months','Sustained'], ['Meta + Google','Channels'], ['Cold → Booked','Journey']],
+    description: 'Built a complete funnel from cold traffic to booked appointments. Consistent 5.6X return sustained over six months.',
   },
 ]
 
 export default function CaseStudies() {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="works" className="py-24 bg-bg-elevated" ref={ref}>
+    <section id="works" className="relative py-28 bg-bg-section" ref={ref}>
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+
       <div className="max-w-6xl mx-auto px-6">
+
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-            Results That Speak for{' '}
-            <span className="text-gradient-gold">Themselves</span>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }} className="text-center mb-16">
+          <span className="badge mb-4">Case Studies</span>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-extrabold">
+            Results That Speak<br />for <span className="text-gold">Themselves</span>
           </h2>
-          <p className="text-text-secondary max-w-xl mx-auto">
-            Real campaigns. Real numbers. No smoke, no mirrors.
-          </p>
+          <p className="text-white/40 mt-4 max-w-xl mx-auto">Real campaigns. Real numbers. No smoke, no mirrors.</p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
+        <div className="grid md:grid-cols-3 gap-5 mb-10">
           {cases.map((c, i) => (
-            <motion.div
-              key={c.client}
-              initial={{ opacity: 0, y: 24 }}
+            <motion.div key={c.client}
+              initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="card-base card-hover relative overflow-hidden flex flex-col"
-            >
-              {/* Top amber line */}
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+              className="card p-7 flex flex-col group relative overflow-hidden">
 
-              <div className="p-7 flex flex-col flex-1">
-                <div className="flex items-start justify-between mb-5">
-                  <span className="text-xs text-accent font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
-                    {c.tag}
-                  </span>
-                  <TrendingUp size={18} className="text-accent/50 flex-shrink-0" />
-                </div>
+              {/* Amber top line */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/70 to-transparent" />
 
-                <h3 className="font-heading text-xl font-bold text-text-primary mb-1">
-                  {c.client}
-                </h3>
-                <p className="text-text-muted text-xs mb-4">{c.sub}</p>
+              {/* Tag */}
+              <div className="flex items-center justify-between mb-6">
+                <span className="badge">{c.tag}</span>
+                <ArrowUpRight size={16} className="text-white/20 group-hover:text-amber-400 transition-colors" />
+              </div>
 
-                <div className="font-heading text-2xl font-extrabold text-accent mb-2">
-                  {c.result}
-                </div>
-                <p className="text-text-muted text-xs mb-4">{c.details}</p>
+              {/* Big result number */}
+              <div className="mb-4">
+                <div className="font-heading text-4xl font-extrabold text-amber-400">{c.result}</div>
+                <div className="text-white/40 text-sm">{c.resultLabel}</div>
+              </div>
 
-                <p className="text-text-secondary text-sm leading-relaxed flex-1">
-                  {c.description}
-                </p>
+              {/* Client */}
+              <h3 className="font-heading text-lg font-bold text-white mb-1">{c.client}</h3>
+              <p className="text-white/30 text-xs mb-4">{c.sub}</p>
+
+              {/* Description */}
+              <p className="text-white/45 text-sm leading-relaxed flex-1 mb-6">{c.description}</p>
+
+              {/* Mini stats */}
+              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/[0.07]">
+                {c.stats.map(([val, lbl]) => (
+                  <div key={lbl} className="text-center">
+                    <div className="text-white text-xs font-semibold leading-tight">{val}</div>
+                    <div className="text-white/25 text-[10px] mt-0.5">{lbl}</div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center"
-        >
-          <a
-            href="https://metaphasemarketing.com/works"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-accent hover:text-accent-dark font-semibold text-sm transition-colors"
-          >
-            See full case studies
-            <ArrowRight size={15} />
+        {/* Link */}
+        <div className="text-center">
+          <a href="https://metaphasemarketing.com/works" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-amber-400 transition-colors font-medium">
+            See full case studies <ArrowUpRight size={14} />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
