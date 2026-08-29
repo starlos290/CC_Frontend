@@ -9,61 +9,57 @@ const sora = Sora({
   subsets: ['latin'],
   variable: '--font-sora',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'ClinicClaw — Your 24/7 AI Employee for Private Practices',
-    template: '%s | ClinicClaw',
-  },
+  title: 'Carlos Courtney | Performance Marketing Expert | $30M+ Ad Spend',
   description:
-    'ClinicClaw deploys HIPAA-safe AI agents that handle appointment reminders, no-show recovery, Google reviews, and patient reactivation — all live in 48 hours.',
+    'Carlos Courtney is a performance marketing expert who has managed $30M+ in ad spend and generated 50M+ leads. CEO of Metaphase Marketing. Book a discovery call.',
   keywords: [
-    'AI for medical practices',
-    'healthcare automation',
-    'HIPAA-safe AI',
-    'appointment reminders',
-    'no-show reduction',
-    'patient reactivation',
-    'Google review automation',
-    'chiropractic software',
-    'med spa automation',
-    'dental practice software',
+    'Carlos Courtney',
+    'performance marketing consultant',
+    'paid media expert',
+    'Metaphase Marketing',
+    'Google Ads expert',
+    'Meta Ads expert',
+    'marketing consultant',
+    'ad spend manager',
   ],
-  authors: [{ name: 'Metaphase Marketing' }],
-  creator: 'Metaphase Marketing',
-  metadataBase: new URL('https://clinicclaw.com'),
+  authors: [{ name: 'Carlos Courtney' }],
+  creator: 'Carlos Courtney',
+  metadataBase: new URL('https://www.carloscourtney.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://clinicclaw.com',
-    siteName: 'ClinicClaw',
-    title: 'ClinicClaw — Your 24/7 AI Employee for Private Practices',
+    url: 'https://www.carloscourtney.com',
+    siteName: 'Carlos Courtney',
+    title: 'Carlos Courtney | Performance Marketing Expert',
     description:
-      'HIPAA-safe AI automation for private practices. Cut no-shows 35–40%, generate 3–5x more Google reviews, reactivate dormant patients. Live in 48 hours.',
+      'CEO of Metaphase Marketing. $30M+ in ad spend managed. 50M+ leads generated. Book a discovery call.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'ClinicClaw AI Automation Platform',
+        alt: 'Carlos Courtney — Performance Marketing Expert',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ClinicClaw — Your 24/7 AI Employee for Private Practices',
+    title: 'Carlos Courtney | Performance Marketing Expert',
     description:
-      'HIPAA-safe AI automation for private practices. Cut no-shows 35–40%, generate 3–5x more Google reviews. Live in 48 hours.',
+      '$30M+ in ad spend managed. 50M+ leads generated. CEO of Metaphase Marketing.',
     images: ['/og-image.png'],
+    creator: '@carloscourtney',
   },
   robots: {
     index: true,
@@ -71,20 +67,39 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Carlos Courtney',
+  jobTitle: 'CEO, Performance Marketing Expert',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Metaphase Marketing',
+    url: 'https://www.metaphasemarketing.com',
+  },
+  url: 'https://www.carloscourtney.com',
+  sameAs: [
+    'https://twitter.com/carloscourtney',
+    'https://www.instagram.com/helloimcarlos/',
+    'https://www.youtube.com/c/CarlosCourtney',
+  ],
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sora.variable} ${dmSans.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body className="font-sans bg-bg-base text-text-primary antialiased">
         <Nav />
         <main>{children}</main>
